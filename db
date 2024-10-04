@@ -1,0 +1,35 @@
+-- Create the database
+CREATE DATABASE student_course_system;
+
+-- Select the database
+USE student_course_system;
+
+-- Create table for students
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Create table for courses
+CREATE TABLE courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL
+);
+
+-- Create table for enrollments (relationship between students and courses)
+CREATE TABLE enrollments (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY(student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
+);
+
+-- Insert some example courses
+INSERT INTO courses (title, description) VALUES
+('Introduction to Python', 'A basic course on Python programming'),
+('Web Development', 'Learn how to build websites using HTML, CSS, and JavaScript'),
+('Database Management', 'A course on SQL and database management');
